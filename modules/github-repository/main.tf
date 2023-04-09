@@ -1,7 +1,10 @@
 terraform {
   required_providers {
-    aws = {
+    github = {
       source = "integrations/github"
+    }
+    http = {
+      source = "hashicorp/http"
     }
   }
 }

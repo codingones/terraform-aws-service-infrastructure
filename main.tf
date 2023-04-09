@@ -9,6 +9,9 @@ terraform {
     aws = {
       source = "hashicorp/aws"
     }
+    http = {
+      source = "hashicorp/http"
+    }
   }
 }
 
