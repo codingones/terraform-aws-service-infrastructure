@@ -1,6 +1,6 @@
 terraform {
   required_providers {
-    aws = {
+    tfe = {
       source = "hashicorp/tfe"
     }
   }

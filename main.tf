@@ -15,10 +15,6 @@ terraform {
   }
 }
 
-# 1er AWS => créer deployer + clefs SERVICE
-# 2eme terraform => Workspace du service avec les variables du deployer SERVICE
-# 3eme github => on create => remplit les resources sur le workspace SERVICE, team token organization pour accéder au workspace du service
-
 variable "github_organization" {
   description = "The github organization name"
   nullable    = false

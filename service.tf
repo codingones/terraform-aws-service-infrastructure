@@ -29,15 +29,17 @@ module "service_terraform_cloud_workspace" {
 module "service_github_repository" {
   source = "github.com/codingones/terraform-aws-service-infrastructure/modules/github-repository"
 
-  terraform_organization                 = var.terraform_organization
-  service                                = var.service
-  service_deployer_aws_access_key_id     = module.service_aws_deployer.aws_deployer_iam_access_key_id
-  service_deployer_aws_secret_access_key = module.service_aws_deployer.aws_deployer_iam_access_key_secret
+  github_organization = var.github_organization
+  github_repository   = var.github_repository
+  project             = var.project
+  service             = var.service
+  commit_author_name  = var.commit_author_name
+  commit_author_email = var.commit_author_email
 
   providers = {
     github = github
-    http = http
+    http   = http
   }
 
-  depends_on = [module.service_aws_deployer]
+  depends_on = [module.service_terraform_cloud_workspace]
 }
