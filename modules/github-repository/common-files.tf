@@ -7,6 +7,10 @@ resource "github_repository_file" "readme" {
   commit_author       = var.commit_author_name
   commit_email        = var.commit_author_email
   overwrite_on_create = true
+
+  lifecycle {
+    ignore_changes = all
+  }
 }
 
 resource "github_repository_file" "license" {
@@ -18,6 +22,10 @@ resource "github_repository_file" "license" {
   commit_author       = var.commit_author_name
   commit_email        = var.commit_author_email
   overwrite_on_create = true
+
+  lifecycle {
+    ignore_changes = all
+  }
 }
 
 resource "github_repository_file" "gitignore" {
@@ -29,6 +37,10 @@ resource "github_repository_file" "gitignore" {
   commit_author       = var.commit_author_name
   commit_email        = var.commit_author_email
   overwrite_on_create = true
+
+  lifecycle {
+    ignore_changes = all
+  }
 }
 
 resource "github_repository_file" "terraformignore" {
@@ -40,6 +52,10 @@ resource "github_repository_file" "terraformignore" {
   commit_author       = var.commit_author_name
   commit_email        = var.commit_author_email
   overwrite_on_create = true
+
+  lifecycle {
+    ignore_changes = all
+  }
 }
 
 data "http" "gitignore" {

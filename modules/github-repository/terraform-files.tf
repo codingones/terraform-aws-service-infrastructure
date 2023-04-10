@@ -7,6 +7,10 @@ resource "github_repository_file" "main" {
   commit_author       = var.commit_author_name
   commit_email        = var.commit_author_email
   overwrite_on_create = true
+
+  lifecycle {
+    ignore_changes = all
+  }
 }
 
 module "templated_main" {
@@ -30,6 +34,10 @@ resource "github_repository_file" "tags" {
   commit_author       = var.commit_author_name
   commit_email        = var.commit_author_email
   overwrite_on_create = true
+
+  lifecycle {
+    ignore_changes = all
+  }
 }
 
 data "http" "tags" {

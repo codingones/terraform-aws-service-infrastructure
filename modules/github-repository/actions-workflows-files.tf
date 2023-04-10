@@ -7,6 +7,10 @@ resource "github_repository_file" "terraform_apply" {
   commit_author       = var.commit_author_name
   commit_email        = var.commit_author_email
   overwrite_on_create = true
+
+  lifecycle {
+    ignore_changes = all
+  }
 }
 
 module "templated_workflow" {
