@@ -29,12 +29,12 @@ module "service_terraform_cloud_workspace" {
 module "service_github_repository" {
   source = "github.com/codingones/terraform-aws-service-infrastructure/modules/github-repository"
 
-  github_organization  = var.github_organization
-  github_repository    = var.github_repository
-  project              = var.project
-  service              = var.service
-  commit_author_name   = var.commit_author_name
-  commit_author_email  = var.commit_author_email
+  github_organization = var.github_organization
+  github_repository   = var.github_repository
+  project             = var.project
+  service             = var.service
+  commit_author_name  = var.commit_author_name
+  commit_author_email = var.commit_author_email
 
   providers = {
     github = github

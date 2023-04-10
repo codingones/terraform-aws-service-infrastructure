@@ -44,3 +44,9 @@ variable "commit_author_email" {
   nullable    = false
   default     = false
 }
+
+variable "force_recreate_all_github_templated_files" {
+  description = "Setting this to true will recreate all templated files from the template last version"
+  nullable    = false
+  default     = false
+}

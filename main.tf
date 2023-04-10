@@ -69,3 +69,9 @@ variable "service_deployer_group_policy_arn" {
   nullable    = false
   default     = false
 }
+
+variable "force_recreate_all_github_templated_files" {
+  description = "Setting this to true will recreate all templated files from the template last version"
+  nullable    = false
+  default     = false
+}

@@ -9,7 +9,7 @@ resource "github_repository_file" "terraform_apply" {
   overwrite_on_create = true
 
   lifecycle {
-    ignore_changes = all
+    ignore_changes = var.force_recreate_all_github_templated_files ? ["content", "file"] : []
   }
 }
 

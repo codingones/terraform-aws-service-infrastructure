@@ -9,7 +9,7 @@ resource "github_repository_file" "readme" {
   overwrite_on_create = true
 
   lifecycle {
-    ignore_changes = all
+    ignore_changes = var.force_recreate_all_github_templated_files ? ["content", "file"] : []
   }
 }
 
@@ -24,7 +24,7 @@ resource "github_repository_file" "license" {
   overwrite_on_create = true
 
   lifecycle {
-    ignore_changes = all
+    ignore_changes = var.force_recreate_all_github_templated_files ? ["content", "file"] : []
   }
 }
 
@@ -39,7 +39,7 @@ resource "github_repository_file" "gitignore" {
   overwrite_on_create = true
 
   lifecycle {
-    ignore_changes = all
+    ignore_changes = var.force_recreate_all_github_templated_files ? ["content", "file"] : []
   }
 }
 
@@ -54,7 +54,7 @@ resource "github_repository_file" "terraformignore" {
   overwrite_on_create = true
 
   lifecycle {
-    ignore_changes = all
+    ignore_changes = var.force_recreate_all_github_templated_files ? ["content", "file"] : []
   }
 }
 
