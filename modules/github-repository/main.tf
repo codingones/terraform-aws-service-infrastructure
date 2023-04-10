@@ -39,9 +39,14 @@ variable "commit_author_name" {
   default     = false
 }
 
-
 variable "commit_author_email" {
   description = "The commit author email for generated files"
+  nullable    = false
+  default     = false
+}
+
+variable "aws_provider_version" {
+  description = "The AWS required provider version for the generated code"
   nullable    = false
   default     = false
 }
