@@ -69,9 +69,3 @@ variable "service_deployer_group_policy_arn" {
   nullable    = false
   default     = false
 }
-
-variable "aws_provider_version" {
-  description = "The AWS required provider version for the generated code"
-  nullable    = false
-  default     = false
-}

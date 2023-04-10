@@ -35,7 +35,6 @@ module "service_github_repository" {
   service              = var.service
   commit_author_name   = var.commit_author_name
   commit_author_email  = var.commit_author_email
-  aws_provider_version = var.aws_provider_version
 
   providers = {
     github = github

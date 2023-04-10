@@ -15,7 +15,6 @@ module "templated_main" {
   template_variables = {
     TERRAFORM_ORGANIZATION = var.project
     TERRAFORM_WORKSPACE    = var.service
-    AWS_PROVIDER_VERSION   = var.aws_provider_version
     AWS_PROVIDER_REGION    = "us-east-1"
     PROJECT                = var.project
     SERVICE                = var.service
