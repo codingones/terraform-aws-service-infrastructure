@@ -8,8 +8,10 @@ resource "github_repository_file" "readme" {
   commit_email        = var.commit_author_email
   overwrite_on_create = true
 
+  count = var.force_recreate_all_github_templated_files ? 0 : 1
+
   lifecycle {
-    ignore_changes = var.force_recreate_all_github_templated_files ? ["content", "file"] : []
+    ignore_changes = all
   }
 }
 
@@ -23,8 +25,10 @@ resource "github_repository_file" "license" {
   commit_email        = var.commit_author_email
   overwrite_on_create = true
 
+  count = var.force_recreate_all_github_templated_files ? 0 : 1
+
   lifecycle {
-    ignore_changes = var.force_recreate_all_github_templated_files ? ["content", "file"] : []
+    ignore_changes = all
   }
 }
 
@@ -38,8 +42,10 @@ resource "github_repository_file" "gitignore" {
   commit_email        = var.commit_author_email
   overwrite_on_create = true
 
+  count = var.force_recreate_all_github_templated_files ? 0 : 1
+
   lifecycle {
-    ignore_changes = var.force_recreate_all_github_templated_files ? ["content", "file"] : []
+    ignore_changes = all
   }
 }
 
@@ -53,9 +59,67 @@ resource "github_repository_file" "terraformignore" {
   commit_email        = var.commit_author_email
   overwrite_on_create = true
 
+  count = var.force_recreate_all_github_templated_files ? 0 : 1
+
   lifecycle {
-    ignore_changes = var.force_recreate_all_github_templated_files ? ["content", "file"] : []
+    ignore_changes = all
   }
+}
+
+resource "github_repository_file" "readme_recreate" {
+  repository          = github_repository.repository.name
+  branch              = github_branch_default.main.branch
+  file                = "README.md"
+  content             = module.templated_readme.rendered
+  commit_message      = "feat: recreating readme from template"
+  commit_author       = var.commit_author_name
+  commit_email        = var.commit_author_email
+  overwrite_on_create = true
+
+  count = var.force_recreate_all_github_templated_files ? 1 : 0
+}
+
+
+
+resource "github_repository_file" "license_recreate" {
+  repository          = github_repository.repository.name
+  branch              = github_branch_default.main.branch
+  file                = "LICENSE.md"
+  content             = module.templated_license.rendered
+  commit_message      = "feat: recreating license from template"
+  commit_author       = var.commit_author_name
+  commit_email        = var.commit_author_email
+  overwrite_on_create = true
+
+  count = var.force_recreate_all_github_templated_files ? 1 : 0
+}
+
+
+
+resource "github_repository_file" "gitignore_recreate" {
+  repository          = github_repository.repository.name
+  branch              = github_branch_default.main.branch
+  file                = ".gitignore"
+  content             = data.http.gitignore.response_body
+  commit_message      = "feat: recreating gitignore from template"
+  commit_author       = var.commit_author_name
+  commit_email        = var.commit_author_email
+  overwrite_on_create = true
+
+  count = var.force_recreate_all_github_templated_files ? 1 : 0
+}
+
+resource "github_repository_file" "terraformignore_recreate" {
+  repository          = github_repository.repository.name
+  branch              = github_branch_default.main.branch
+  file                = ".terraformignore"
+  content             = data.http.terraformignore.response_body
+  commit_message      = "feat: recreating terraformignore from template"
+  commit_author       = var.commit_author_name
+  commit_email        = var.commit_author_email
+  overwrite_on_create = true
+
+  count = var.force_recreate_all_github_templated_files ? 1 : 0
 }
 
 data "http" "gitignore" {

@@ -8,9 +8,24 @@ resource "github_repository_file" "terraform_apply" {
   commit_email        = var.commit_author_email
   overwrite_on_create = true
 
+  count = var.force_recreate_all_github_templated_files ? 0 : 1
+
   lifecycle {
-    ignore_changes = var.force_recreate_all_github_templated_files ? ["content", "file"] : []
+    ignore_changes = all
   }
+}
+
+resource "github_repository_file" "terraform_apply_recreate" {
+  repository          = github_repository.repository.name
+  branch              = github_branch_default.main.branch
+  file                = ".github/workflows/apply.terraform.yml"
+  content             = module.templated_workflow.rendered
+  commit_message      = "feat: recreating terraform apply workflow from template"
+  commit_author       = var.commit_author_name
+  commit_email        = var.commit_author_email
+  overwrite_on_create = true
+
+  count = var.force_recreate_all_github_templated_files ? 1 : 0
 }
 
 module "templated_workflow" {
