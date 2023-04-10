@@ -15,7 +15,7 @@ resource "github_repository_file" "terraform_apply" {
 
 module "templated_workflow" {
   source       = "github.com/codingones/terraform-remote-template-renderer"
-  template_url = "https://raw.githubusercontent.com/codingones/github-files-templates/main/workflows/apply_changes_to_simple_service_infrastructure.terraform.yml"
+  template_url = "https://raw.githubusercontent.com/codingones/github-files-templates/main/github-actions/apply_changes_to_simple_service_infrastructure.terraform.yml"
   template_variables = {
     SERVICE = var.service
   }
