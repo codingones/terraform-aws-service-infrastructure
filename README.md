@@ -2,7 +2,7 @@
 
 ## About
 
-A module that aims to provide a ready to develop configuration of an AWS Service in the PSL architecture
+A module that aims to provide a ready to develop configuration of an AWS Service in the PSL architecture.
 
 ## TOC
 
@@ -42,6 +42,11 @@ module "i_love_automation_identity_service" {
   }
 }
 ```
+
+### Templates files
+
+To regenerate a file from a template, discarding any user made changes, delete it in the service repository and reapply changes to setup-organization.
+To regenerate all files, pass force_recreate_all_github_templated_files to true.
 
 ## Contribution
 

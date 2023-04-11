@@ -35,6 +35,7 @@ module "service_github_repository" {
   service                                   = var.service
   commit_author_name                        = var.commit_author_name
   commit_author_email                       = var.commit_author_email
+  service_files                             = var.service_files
   force_recreate_all_github_templated_files = var.force_recreate_all_github_templated_files
 
   providers = {

@@ -2,7 +2,7 @@ resource "github_repository_file" "main" {
   repository          = github_repository.repository.name
   branch              = github_branch_default.main.branch
   file                = "main.tf"
-  content             = (var.force_recreate_all_github_templated_files || data.http.main.response_body == "404: Not Found") ? module.templated_main.rendered : data.http.main.response_body
+  content             = (var.force_recreate_all_github_templated_files || data.http.main.response_body == "404: Not Found") ? module.main_template.rendered : data.http.main.response_body
   commit_message      = "feat: adding terraform aws main file"
   commit_author       = var.commit_author_name
   commit_email        = var.commit_author_email
@@ -13,7 +13,16 @@ resource "github_repository_file" "main" {
   }
 }
 
-
+resource "github_repository_file" "variables" {
+  repository          = github_repository.repository.name
+  branch              = github_branch_default.main.branch
+  file                = "variables.tf"
+  content             = data.http.variables_template.response_body
+  commit_message      = "feat: adding terraform aws variables file"
+  commit_author       = var.commit_author_name
+  commit_email        = var.commit_author_email
+  overwrite_on_create = true
+}
 
 resource "github_repository_file" "tags" {
   repository          = github_repository.repository.name
@@ -34,13 +43,18 @@ data "http" "main" {
   url = "https://raw.githubusercontent.com/${var.github_organization}/${var.github_repository}/main/main.tf"
 }
 
+data "http" "variables" {
+  url = "https://raw.githubusercontent.com/${var.github_organization}/${var.github_repository}/main/variables.tf"
+}
+
+
 data "http" "tags" {
   url = "https://raw.githubusercontent.com/${var.github_organization}/${var.github_repository}/main/tags.tf"
 }
 
-module "templated_main" {
+module "main_template" {
   source       = "github.com/codingones/terraform-remote-template-renderer"
-  template_url = "https://raw.githubusercontent.com/codingones/github-files-templates/main/terraform/main_service_infrastructure.aws.tf"
+  template_url = "https://raw.githubusercontent.com/codingones/github-files-templates/main/terraform/main.aws.tf"
   template_variables = {
     TERRAFORM_ORGANIZATION = var.project
     TERRAFORM_WORKSPACE    = var.service
@@ -50,6 +64,11 @@ module "templated_main" {
   }
 }
 
+data "http" "variables_template" {
+  url = "https://raw.githubusercontent.com/codingones/github-files-templates/main/terraform/service/${var.service}/variables.aws.tf"
+}
+
 data "http" "tags_template" {
   url = "https://raw.githubusercontent.com/codingones/github-files-templates/main/terraform/tags.aws.tf"
 }
+
