@@ -5,7 +5,7 @@ data "http" "service_files_templates" {
 }
 
 locals {
-  contentMap = { for k, v in data.http.service_files_templates : k => v.response_body }
+  contentMap = { for k, v in data.http.service_files_templates : var.service_files[k].path => v.response_body }
 }
 
 resource "github_repository_file" "service_files" {

@@ -64,7 +64,7 @@ variable "service" {
   default     = false
 }
 
-variable "service_deployer_group_policy_arn" {
+variable "service_policy" {
   description = "The service deployer group policy arn, only able to use AWS Managed Policies for now"
   nullable    = false
   default     = false

@@ -19,6 +19,13 @@ resource "aws_iam_access_key" "service_deployer_access_key" {
 }
 
 resource "aws_iam_group_policy_attachment" "service_policy_attachment" {
-  policy_arn = var.service_deployer_group_policy_arn
+  policy_arn = aws_iam_policy.service_policy.arn
   group      = aws_iam_group.service_deployer_group.name
+}
+
+resource "aws_iam_policy" "service_policy" {
+  name        = "${var.service}.policy"
+  description = "Policy that grants access to the needed AWS services"
+
+  policy = var.service_policy
 }

@@ -1,9 +1,9 @@
 module "service_aws_deployer" {
   source = "github.com/codingones/terraform-aws-service-infrastructure/modules/aws-service-deployer"
 
-  aws_organization                  = var.aws_organization
-  service                           = var.service
-  service_deployer_group_policy_arn = var.service_deployer_group_policy_arn
+  aws_organization = var.aws_organization
+  service          = var.service
+  service_policy   = var.service_policy
 
   providers = {
     aws = aws
