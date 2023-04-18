@@ -20,9 +20,9 @@ resource "github_repository_file" "service_files" {
   commit_email        = var.commit_author_email
   overwrite_on_create = true
 
-  lifecycle {
-    ignore_changes = all
-  }
+  #lifecycle {
+  #  ignore_changes = all
+  #}
 }
 
 

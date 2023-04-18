@@ -21,3 +21,12 @@ resource "tfe_variable" "iam_deployer_access_key_secret" {
   description  = "${var.terraform_organization}.${var.service}.deployer secret access key"
   sensitive    = true
 }
+
+resource "tfe_variable" "service" {
+  key          = "service"
+  value        = var.service
+  category     = "terraform"
+  workspace_id = tfe_workspace.service.id
+  description  = "The service name in the Projet-Service-Layer architecture"
+  sensitive    = false
+}
