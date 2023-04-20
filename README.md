@@ -28,8 +28,8 @@ module "i_love_automation_identity_service" {
   terraform_organization = local.service.name
 
   github_repository   = network-infrastructure
-  commit_author_name  = "Terraform"
-  commit_author_email = "romain.cambonie@gmail.com"
+  commit_author_name  = local.service.commit_author
+  commit_author_email = local.service.commit_email
 
   project             = local.service.name
   service             = "identity"
