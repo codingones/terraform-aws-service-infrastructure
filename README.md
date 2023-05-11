@@ -4,6 +4,11 @@
 
 A module that aims to provide a ready to develop configuration of an AWS Service in the PSL architecture.
 
+It initializes: 
+- GitHub repository
+- Terraform workspace
+- AWS deployer iam user
+
 ## TOC
 
 - 🪧 [About](#about)
@@ -20,33 +25,28 @@ Example usage.
 This module rely on the previous deployment of admin-organisation.
 
 ```terraform
-module "i_love_automation_identity_service" {
-  source = "modules/infrastructure-service"
+module "identity_service" {
+  source = "github.com/codingones-terraform-modules/aws-service-infrastructure"
 
-  aws_organization = local.service.name
-  github_organization = local.service.name
-  terraform_organization = local.service.name
+  aws_organizational_unit = local.service.aws_organizational_unit
+  github_organization = local.service.github_organization
+  terraform_organization = local.service.terraform_cloud_organization
 
-  github_repository   = network-infrastructure
-  commit_author_name  = local.service.commit_author
-  commit_author_email = local.service.commit_email
+  github_repository   = "identity-infrastructure"
+  template_repository = "codingones-github-templates/aws-service-identity"
 
   project             = local.service.name
   service             = "identity"
   
-  service_deployer_group_policy_arn = "arn:aws:iam::aws:policy/CognitoFullAccess"
+  policy = local.policies.identity-infrastructure
+          
   providers = {
-    github = github.i-love-automation
-    tfe    = tfe.i-love-automation
-    aws    = aws.as_i_love_automation
+    github = github
+    tfe    = tfe
+    aws    = aws.organizational_unit
   }
 }
 ```
-
-### Templates files
-
-To regenerate a file from a template, discarding any user made changes, delete it in the service repository and reapply changes to setup-organization.
-To regenerate all files, pass force_recreate_all_github_templated_files to true.
 
 ## Contribution
 

@@ -1,47 +1,45 @@
-module "service_aws_deployer" {
-  source = "github.com/codingones/terraform-aws-service-infrastructure/modules/aws-service-deployer"
+module "aws_deployer" {
+  source = "github.com/codingones-terraform-modules/aws-service-infrastructure/modules/aws-service-deployer"
 
-  aws_organization = var.aws_organization
-  service          = var.service
-  service_policy   = var.service_policy
+  aws_organizational_unit = var.aws_organizational_unit
+  service                 = var.service
+  policy                  = var.policy
 
   providers = {
     aws = aws
   }
 }
 
-module "service_terraform_cloud_workspace" {
-  source = "github.com/codingones/terraform-aws-service-infrastructure/modules/terraform-cloud-workspace"
+module "terraform_cloud_workspace" {
+  source = "github.com/codingones-terraform-modules/aws-service-infrastructure/modules/terraform-cloud-workspace"
 
-  terraform_organization                 = var.terraform_organization
-  service                                = var.service
-  service_deployer_aws_access_key_id     = module.service_aws_deployer.aws_deployer_iam_access_key_id
-  service_deployer_aws_secret_access_key = module.service_aws_deployer.aws_deployer_iam_access_key_secret
+  terraform_organization         = var.terraform_organization
+  service                        = var.service
+  deployer_aws_access_key_id     = module.aws_deployer.aws_deployer_iam_access_key_id
+  deployer_aws_secret_access_key = module.aws_deployer.aws_deployer_iam_access_key_secret
 
   providers = {
     tfe = tfe
   }
 
-  depends_on = [module.service_aws_deployer]
+  depends_on = [module.aws_deployer]
 }
 
 
-module "service_github_repository" {
-  source = "github.com/codingones/terraform-aws-service-infrastructure/modules/github-repository"
+module "github_repository" {
+  source = "github.com/codingones-terraform-modules/aws-service-infrastructure/modules/github-repository-fork-template"
 
-  github_organization                       = var.github_organization
-  github_repository                         = var.github_repository
-  project                                   = var.project
-  service                                   = var.service
-  commit_author_name                        = var.commit_author_name
-  commit_author_email                       = var.commit_author_email
-  service_files                             = var.service_files
-  force_recreate_all_github_templated_files = var.force_recreate_all_github_templated_files
+  github_organization = var.github_organization
+  github_repository   = var.github_repository
+  project             = var.project
+  service             = var.service
+  commit_author       = var.commit_author
+  commit_email        = var.commit_email
 
   providers = {
     github = github
     http   = http
   }
 
-  depends_on = [module.service_terraform_cloud_workspace]
+  depends_on = [module.terraform_cloud_workspace]
 }

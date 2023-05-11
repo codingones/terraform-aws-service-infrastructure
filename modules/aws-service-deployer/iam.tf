@@ -1,5 +1,5 @@
 resource "aws_iam_user" "service_deployer" {
-  name = "${var.aws_organization}.${var.service}.infrastructure"
+  name = "${var.aws_organizational_unit}.${var.service}.infrastructure"
 }
 
 resource "aws_iam_group" "service_deployer_group" {
