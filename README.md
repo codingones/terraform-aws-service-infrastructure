@@ -29,8 +29,8 @@ module "identity_service" {
   source = "github.com/codingones-terraform-modules/aws-service-infrastructure"
 
   aws_organizational_unit = local.service.aws_organizational_unit
-  github_organization = local.service.github_organization
-  terraform_organization = local.service.terraform_cloud_organization
+  github_organization     = local.service.github_organization
+  terraform_organization  = local.service.terraform_cloud_organization
 
   github_repository   = "identity-infrastructure"
   template_repository = "codingones-github-templates/aws-service-identity"
