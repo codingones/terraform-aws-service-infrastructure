@@ -10,14 +10,14 @@ variable "terraform_organization" {
   default     = false
 }
 
-variable "service_deployer_aws_access_key_id" {
+variable "deployer_aws_access_key_id" {
   description = "The terraform organization workspace iam deployer access key id"
   nullable    = false
   default     = false
   sensitive   = true
 }
 
-variable "service_deployer_aws_secret_access_key" {
+variable "deployer_aws_secret_access_key" {
   description = "The terraform organization workspace iam deployer secret access key"
   nullable    = false
   default     = false
