@@ -59,3 +59,10 @@ variable "policy" {
   nullable    = false
   default     = false
 }
+
+variable "allow_force_pushes_to_default_branch" {
+  type        = bool
+  description = "Allows to push directly on default branch, if false a PR is mandatory"
+  nullable    = true
+  default     = false
+}
