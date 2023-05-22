@@ -36,7 +36,8 @@ module "github_repository" {
   service                  = var.service
   commit_author            = var.commit_author
   commit_email             = var.commit_email
-  github_repository_topics = ["terraform", "aws", "template"]
+  github_repository_topics = ["terraform", "aws", "service", var.service]
+  template_repository      = var.template_repository
 
   providers = {
     github = github
