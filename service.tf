@@ -30,14 +30,17 @@ module "terraform_cloud_workspace" {
 module "github_repository" {
   source = "github.com/codingones-terraform-modules/github-repository-fork-template"
 
-  github_organization          = var.github_organization
-  github_repository            = var.github_repository
-  project                      = var.project
-  service                      = var.service
-  commit_author                = var.commit_author
-  commit_email                 = var.commit_email
-  github_repository_topics     = ["terraform", "aws", "service", var.service]
-  template_repository          = var.template_repository
+  github_organization       = var.github_organization
+  github_repository         = var.github_repository
+  project                   = var.project
+  service                   = var.service
+  commit_author             = var.commit_author
+  commit_email              = var.commit_email
+  github_repository_topics  = ["terraform", "aws", "service", var.service]
+  template_repository       = var.template_repository
+  templated_files_variables = var.templated_files_variables
+  template_fork             = var.template_fork
+
   allow_force_pushes_to_default_branch = var.allow_force_pushes_to_default_branch
 
   providers = {

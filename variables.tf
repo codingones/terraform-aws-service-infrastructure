@@ -29,6 +29,19 @@ variable "template_repository" {
   default     = false
 }
 
+variable "templated_files_variables" {
+  type        = map(string)
+  description = "The variables to replace in the forked template repository files"
+  nullable    = false
+  default     = {}
+}
+
+variable "template_fork" {
+  type        = bool
+  description = "If true will replace all repository content from template, this is a destructive operation"
+  nullable    = false
+}
+
 variable "commit_author" {
   description = "The commit author name for generated files"
   nullable    = true
