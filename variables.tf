@@ -23,6 +23,12 @@ variable "github_repository" {
   default     = false
 }
 
+variable "github_repository_visibility" {
+  description = "The repository visibility host the code within the organization"
+  nullable    = true
+  default     = "public"
+}
+
 variable "template_repository" {
   description = "The repository which host the template to fork / sync"
   nullable    = false
